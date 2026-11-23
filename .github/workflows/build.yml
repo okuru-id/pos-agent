@@ -48,6 +48,10 @@ jobs:
         with:
           workspaces: src-tauri -> target
 
+      # rust-cache memulihkan folder ini tanpa isi library, jadi sherpa-onnx-sys gagal link; unduh ulang
+      - run: rm -rf src-tauri/target/sherpa-onnx-prebuilt
+        shell: bash
+
       - run: npm ci
 
       - run: npx tauri build --bundles ${{ matrix.bundles }}
